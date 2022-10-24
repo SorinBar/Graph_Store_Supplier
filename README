@@ -1,0 +1,68 @@
+--Tema 3 SD--
+Task 1 [Afisare traseu minim de la un depozit la anumite magazine]:
+Metoda de rezolvare:
+	-Se foloseste algoritmul lui Dijkstra modificat
+	-De fiecare data cand actualizam distanta in vectorul de distante
+	al algoritmului vom salva legatura dintre nodul curent si copilul
+	acestuia atfel:
+		*Intr-un vector de nr_nodes elemente numit road1 pentru
+		primul drum (depozit->magazin) salvam tatal nodului i in 
+		road1[i]
+		*Astfel putem afla nodurile parcurse in ordine inversa(
+		magazin->depozit)
+		*Salvam nodurile intr-un vector si le afisam invers
+	-Se aplica algoritmul de doua ori, prima data depozit->magazin, 
+	salvam rezultatul intr-un vector de tati road1, iar a doua oara 
+	magazin->depozit si salvam rezultatul in road2
+	-Afisam primul drum in ordine inversa urmat de al doilea in ordine
+	inversa
+	
+Task 2 [Afisare componente tare conexe in ordinea nodurilor componente]:
+Metoda de rezolvare:
+	-Aplicam algoritmul lui Kosaraju, iar in loc sa afisam componentele
+	tare conexe, le vom salva intr-o matrice de frecventa(SConex)
+	-Pentru fiecare componenta conexa se creeaza un vector de nr_nodes(
+	numarul de noduri ale grafului) componente si se retine 1 in 
+	SConex[k][i] daca in componenta conexa cu numarul k + 1(sau k daca
+	numaratoarea incepe de la 0) exista nodul i, 0 in caz contrar
+	-Se foloseste si un vector de ordine pentru a accesa mai rapid
+	componentele conexe in ordinea corecta
+	-Daca nodul i este adaugat in componenta conexa cu numarul k,
+	presupunand ca numaratoarea incepe de la 0, se va salva in vectorul
+	de ordine k (order[i] = k)
+	-Parcurgem order[i] crescator(i = 0 -> nr_nodes - 1) si afisam 
+	liniile in ordinea in care apar in order, urmand sa setam order[i]
+	= -1 pentru fiecare nod i afisat, pentru a nu se afisa de mai multe
+	ori o componenta conexa
+	-Fiecare linie din matrice este un vector de frecventa, deci avem
+	deja nodurile sortate, vom afisa i daca SConex[k][i] = 1;
+
+Task 3 [Afisare cost minim drum fiind necesara parcurgerea unor noduri]
+Metoda de rezolvare:
+	-Folosim Hint-ul
+	-Folosim Algoritmul lui Dijkstra modificat, astfel incat nu vom
+	mai verifica daca un nod este nevizitat ci, vom verifica daca
+	perechea (nod, masca) este nevizitata
+	-De fiecare data cand ajungem la nodul din care am plecat, daca
+	am vizitat toate nodurile necesare(aflam din masca), verificam
+	daca costul este mai mic decat costul minim si il actualizam daca
+	este cazul
+	-Vom retine perechile vizitate intr-un vector de structuri de tip
+	Vector*, practic o matrice initial cu nr_nodes linii si 0 coloane
+	care se mareste dinamic
+	-Daca se vizieaza nodul i cu masca M vom adauga in matrice la finalul
+	liniei i masca M(unsigned int) (vis[i][col] = M)
+	-Ca sa verificam daca o pereche (i, M) a fost vizitata parcurgem 
+	linia i a matricei vis si daca nu gasim masca M atunci aceasta 
+	pereche nu a fost vizitata
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
