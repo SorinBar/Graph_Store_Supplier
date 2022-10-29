@@ -67,9 +67,9 @@ void VECTOR_switch(Vector *v, unsigned int pos1, unsigned int pos2){
     if(item1 == NULL || item2 == NULL)
         return;
     void *auxItem = malloc(v->itemSize);
-    memcpy(auxItem, VECTOR_get_item(v, pos1), v->itemSize);
-    memmove(VECTOR_get_item(v, pos1), VECTOR_get_item(v, pos2), v->itemSize);
-    memcpy(VECTOR_get_item(v, pos2), auxItem, v->itemSize);
+    memcpy(auxItem, item1, v->itemSize);
+    memmove(item1, item2, v->itemSize);
+    memcpy(item2, auxItem, v->itemSize);
     free(auxItem);
 }
 // Free vector allocated memory
